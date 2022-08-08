@@ -1,8 +1,8 @@
 <template>
     <section>
-        <TodoListItem  v-for="todoItem in todoList " :key="todoItem.id" :todo="todoItem"></TodoListItem>
+        <TodoListItem  @delete-item="$emit('delete-event', $event)" v-for="todoItem in todoList " :key="todoItem.id" :todo="todoItem"></TodoListItem>
 
-        <SummaryInfo></SummaryInfo>
+        <SummaryInfo :todoList="todoList"></SummaryInfo>
         <small> There is {{todoLength}} will do todo.</small>
 
     </section>

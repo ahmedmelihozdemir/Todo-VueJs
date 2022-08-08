@@ -4,13 +4,12 @@
             <section class="upper-box">
                 <AddSection :addItem="addTodo"></AddSection>
 
-                <TodoList :todoList="todoList"></TodoList>
-                
+                <TodoList
+                    @delete-event="deleteItem"
+                    :todoList="todoList"
+                ></TodoList>
             </section>
         </div>
-
-
-        
     </div>
 </template>
 
@@ -25,31 +24,33 @@ export default {
         TodoList,
     },
     setup() {
-        const todoList  = ref([]);
-        const addTodo = ((todoText) => {
+        const todoList = ref([]);
+        const addTodo = (todoText) => {
             todoList.value.push({
                 id: new Date().getTime(),
                 title: todoText,
-                
             });
+        };
         
-        });
-        
+        const deleteItem = (todo) => {
+            todoList.value = todoList.value.filter((item) => item.id !== todo.id);
+        };
         return {
             todoList,
             addTodo,
+            deleteItem,
+
         };
     },
 };
 </script>
 
 <style>
-body{
+body {
     background-color: #e7f3b565;
-
 }
 .upper-box {
-/*  background-color: #e7f3b565; */    
+    /*  background-color: #e7f3b565; */
     border-radius: 5px;
     padding: 20px;
 }

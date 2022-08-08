@@ -10,24 +10,32 @@
         />
         <span class="todoCheck" @click="todoCheck"> {{ todo.title }}</span>
         <div>
-            <button class="btn btn-danger btn-sm">Delete</button>
+            <button @click="deleteItem" class="btn btn-danger btn-sm">
+                Delete
+            </button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    
-
     props: {
         todo: Object,
     },
-    methods:{
-        todoCheck(){
+    methods: {
+        todoCheck() {
             this.completed = !this.completed;
         },
     },
-
+    setup(props, { emit }) {
+        
+        const deleteItem = () => {
+            emit("delete-item", props.todo);
+        };
+        return {
+            deleteItem,
+        };
+    },
 };
 </script>
 
@@ -51,7 +59,7 @@ export default {
 .btn-danger {
     box-shadow: 0 0 15px #5e3cba;
 }
-.todoCheck{
+.todoCheck {
     cursor: pointer;
 }
 </style>
