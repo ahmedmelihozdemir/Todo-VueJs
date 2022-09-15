@@ -1,5 +1,6 @@
 # todo-list-composition
-
+Classic todo app.
+ 
 ## Project setup
 ```
 npm install
